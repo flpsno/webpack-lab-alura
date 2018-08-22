@@ -36,7 +36,11 @@ plugins.push(
         filename: 'vendor.bundle.js'
 }));
 
+let SERVICE_URL = JSON.stringify('http://localhost:3000');
+
 if (process.env.NODE_ENV == 'production') {
+
+    SERVICE_URL = JSON.stringify('http://endereco-da-sua-api');
 
     plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
     plugins.push(new babiliPlugin());
@@ -51,6 +55,10 @@ if (process.env.NODE_ENV == 'production') {
         canPrint: true
     }));
 }
+
+plugins.push(new webpack.DefinePlugin({
+    SERVICE_URL: SERVICE_URL
+}));
 
 module.exports = {
     entry: {
